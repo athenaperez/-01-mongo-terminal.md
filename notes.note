@@ -1,0 +1,113 @@
+MONGO
+
+MongoDB is a free and open-source document-oriented database. Data in MongoDB is stored in JSON-like documents with dynamic schemas.
+
+In mongo, each database can be broken into multiple collections. A collection could be compared roughly to a SQL table. For example, a database containing information about an NSS class could have a collection for students and a collection for teachers. Each collection will contain individual documents. A student document might contain information such as name, favorite color, birthday, and a list of likes. The data in each document is stored in JSON-like format. The values in each key : value pair can be almost any type (string, number, object, array, etc). In addition to the key : value pairs that you add, mongo will automatically add a key of _id with a unique identifier. Since Mongo has a dynamic schema, documents within the same collection are NOT required to have the exact same sets of keys
+
+Installation:
+brew update
+brew install mongodb
+sudo mkdir -p /data/db
+sudo chown -R $(whoami) /data
+
+Run MongoD in one tab
+#mongod
+
+new tab,
+run Mongo
+#mongo
+
+
+-to create and move into
+#use cohort17
+#db.students.insert({name: "Petere", favoriteColor: "Black"})
+-put whole thing in an object
+
+
+#show collections
+-show collections in current db
+
+#db.getCollectionNames()
+-shows collectiosn in curretn db
+
+#db
+-will show what db you are currently in 
+
+#db.teachers.find()
+-will show all teachers in the collection
+
+#db.students.getIndexes()
+-shows indexes that you've placed on the collection
+
+#db.teachers.update({name: "Caitlin"}, {$set:{ favoriteColor: "Blue"} })
+-$ indicates database operator
+-set operator
+    -https://docs.mongodb.com/manual/reference/operator/update/set/
+
+find something specific
+-first object you pass is always the query, like how you want to find the student (ex: favoriteColor)
+-second object is projection (in SQL its the SELECT statement)
+  -takes a boulean
+#db.teachers.find({name: "Caitlin"}, {previousEmployer: true})
+
+
+find teachers where name is caitlin OR callan
+#db.teachers.find({$or: [{name: "Caitlin"}, name: "Callan"}] })
+
+#db.teachers.update({name: "Joe"}, {$set: {favoriteColor: "Green"}}, {upsert: true})
+-upsert - update of existing object, and if it can't find what you're looking for, it will create the instance
+#db.teachers.find()
+-
+
+
+#db.teachers.find().sort({name: -1})
+
+#db.teachers.find().limit(2).skip(1)
+-want to find all the teachers, limit two, but skip the first 1
+
+#db.students.insert({name: {first: "James", last: "West"}, favoriteColor: false})
+
+#db.students.find({"name.first": "James"})
+-for dot notation you have to use quotes - "name.first":
+
+removing stuff
+#db.teachers.remove({name: "Callan"}, {justOne: true})
+-removes just one callan, and the first instance of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
